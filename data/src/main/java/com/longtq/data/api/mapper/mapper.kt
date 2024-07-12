@@ -20,5 +20,5 @@ fun Throwable.toGeneralError(): NetworkError {
 }
 
 fun UseResponse.toDomainModel(): User {
-    return User(id, userName, email, password, avatar, displayName)
+    return User(userName, email, password, avatar, displayName)
 }

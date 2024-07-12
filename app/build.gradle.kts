@@ -52,6 +52,9 @@ android {
 }
 
 dependencies {
+    implementation(project(":domain"))
+    implementation(project(":data"))
+
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -60,7 +63,6 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
-//    implementation(libs.androidx.material3)
     implementation(libs.androidx.lifecycle.runtime.compose.android)
     implementation(libs.firebase.crashlytics.buildtools)
     testImplementation(libs.junit)
@@ -70,9 +72,7 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-    implementation(project(":domain"))
-    implementation(project(":data"))
+    implementation(libs.androidx.navigation.compose)
 
     //dagger hilt
     implementation(libs.hilt.android)
@@ -89,5 +89,6 @@ dependencies {
     // Arrow
     implementation(libs.arrow.core)
     implementation(libs.arrow.fx.coroutines)
+
 
 }

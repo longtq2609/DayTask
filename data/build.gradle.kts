@@ -47,6 +47,8 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit.v290)
     implementation(libs.converter.gson)
+    implementation(libs.okhttp3.logging.interceptor)
+
 
     // Arrow
     implementation(libs.arrow.core)

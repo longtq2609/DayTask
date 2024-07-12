@@ -49,6 +49,7 @@ import com.longtq.daytask.until.components.LoadingDialog
 @Composable
 fun LoginScreen(
     onClickRegister: () -> Unit,
+    onNavigationToMain: () -> Unit
 ) {
     val viewModel: LoginViewModel = hiltViewModel()
     val state = viewModel.state.collectAsStateWithLifecycle()
@@ -60,7 +61,9 @@ fun LoginScreen(
         onChangeEmailAddress = {
             viewModel.onChangeEmailAddress(it)
         },
-        onChangePassword = { viewModel.onChangePassword(it) })
+        onChangePassword = { viewModel.onChangePassword(it) },
+        onNavigationToMain = onNavigationToMain
+    )
 }
 
 @Composable
@@ -70,7 +73,8 @@ fun LoginView(
     onClickLoginGoogle: () -> Unit,
     onClickRegister: () -> Unit,
     onChangeEmailAddress: (String) -> Unit,
-    onChangePassword: (String) -> Unit
+    onChangePassword: (String) -> Unit,
+    onNavigationToMain: () -> Unit
 ) {
 
     val email = remember { mutableStateOf(TextFieldValue("")) }
@@ -209,7 +213,7 @@ fun LoginView(
             modifier = Modifier
                 .padding(top = dimensionResource(id = R.dimen.dimen_32))
                 .fillMaxWidth(),
-            onClick = { onClickLogin.invoke() },
+            onClick = { onNavigationToMain.invoke() },
             textButton = stringResource(id = R.string.button_text_login)
         )
         Row(
@@ -277,5 +281,6 @@ fun LoginViewPreview() {
         onChangeEmailAddress = {},
         onChangePassword = {},
         onClickRegister = {},
-        onClickLoginGoogle = {})
+        onClickLoginGoogle = {},
+        onNavigationToMain = {})
 }

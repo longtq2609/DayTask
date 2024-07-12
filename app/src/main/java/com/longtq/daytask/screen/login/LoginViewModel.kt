@@ -22,13 +22,6 @@ class LoginViewModel @Inject constructor(
             _state.update {
                 it.copy(isLoading = true)
             }
-//            if(_state.value.email != null  || _state.value.password != null){
-//                sendEvent(Event.ShowDialog("Email or Password not empty", message = "Email or Password not empty"))
-//                _state.update {
-//                    it.copy(isLoading = false)
-//                }
-//                return@launch
-//            }
             if (!isValidEmail(_state.value.email ?: "")) {
                 sendEvent(
                     Event.ShowDialog(
