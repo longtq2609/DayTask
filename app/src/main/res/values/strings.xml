@@ -35,4 +35,7 @@
     <!-- Notification -->
     <string name="title_notification">Notification"</string>
 
+    <!-- Create Task -->
+    <string name="title_create_task">Create Task"</string>
+
 </resources>

@@ -55,6 +55,7 @@ dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
 
+    implementation(libs.androidx.material)
     implementation(libs.androidx.material3.android)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -73,6 +74,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.navigation.compose)
+    implementation(libs.accompanist.navigation.animation)
 
     //dagger hilt
     implementation(libs.hilt.android)

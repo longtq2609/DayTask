@@ -5,14 +5,10 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
-import com.longtq.daytask.screen.calendar.calendarScreen
-import com.longtq.daytask.screen.chat.chatScreen
-import com.longtq.daytask.screen.home.homeScreen
 import com.longtq.daytask.screen.login.loginNavigation
 import com.longtq.daytask.screen.login.loginScreen
 import com.longtq.daytask.screen.main.mainScreen
-import com.longtq.daytask.screen.notification.navigationToNotification
-import com.longtq.daytask.screen.notification.notificationScreen
+import com.longtq.daytask.screen.main.navigationToMain
 import com.longtq.daytask.screen.register.navigationToRegister
 import com.longtq.daytask.screen.register.registerScreen
 
@@ -29,13 +25,9 @@ fun AppNavigation(
     ) {
         loginScreen(
             onClickRegister = { navController.navigationToRegister() },
-            onNavigationToMain = { navController.navigationToNotification() }
+            onNavigationToMain = { navController.navigationToMain() }
         )
         registerScreen { navController.popBackStack() }
         mainScreen()
-        homeScreen()
-        calendarScreen()
-        chatScreen()
-        notificationScreen()
     }
 }
