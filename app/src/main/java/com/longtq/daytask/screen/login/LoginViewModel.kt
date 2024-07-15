@@ -2,8 +2,8 @@ package com.longtq.daytask.screen.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.longtq.daytask.until.sendEvent
 import com.longtq.daytask.util.Event
+import com.longtq.daytask.util.sendEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

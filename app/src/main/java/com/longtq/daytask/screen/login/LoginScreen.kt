@@ -39,11 +39,11 @@ import com.longtq.daytask.R
 import com.longtq.daytask.ui.theme.baseTextColor
 import com.longtq.daytask.ui.theme.orangeYellow
 import com.longtq.daytask.ui.theme.white
-import com.longtq.daytask.until.components.AppButton
-import com.longtq.daytask.until.components.AppButtonGoogle
-import com.longtq.daytask.until.components.AppText
-import com.longtq.daytask.until.components.AppTextField
-import com.longtq.daytask.until.components.LoadingDialog
+import com.longtq.daytask.util.components.AppButton
+import com.longtq.daytask.util.components.AppButtonGoogle
+import com.longtq.daytask.util.components.AppText
+import com.longtq.daytask.util.components.AppTextField
+import com.longtq.daytask.util.components.LoadingDialog
 
 
 @Composable

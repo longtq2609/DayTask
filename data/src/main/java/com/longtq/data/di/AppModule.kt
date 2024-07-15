@@ -1,12 +1,16 @@
 package com.longtq.data.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import com.longtq.data.RepositoryImpl
 import com.longtq.data.api.ApiService
+import com.longtq.data.preference.AppPreferences
 import com.longtq.domain.repository.Repository
 import com.longtq.domain.usecase.RegisterUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -21,7 +25,7 @@ class AppModule {
     @Singleton
     fun provideApiService(): ApiService {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY // Log toàn bộ body
+            level = HttpLoggingInterceptor.Level.BODY
         }
 
         val client = OkHttpClient.Builder()
@@ -38,13 +42,26 @@ class AppModule {
 
     @Provides
     @Singleton
-    fun provideRepository(apiService: ApiService): Repository {
-        return RepositoryImpl(apiService)
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences {
+        return context.getSharedPreferences("app_prefs", Context.MODE_PRIVATE)
     }
 
     @Provides
     @Singleton
-    fun provideRegisterUseCase(repository: Repository): RegisterUseCase {
-        return RegisterUseCase(repository)
+    fun provideAppPreferences(sharedPreferences: SharedPreferences): AppPreferences {
+        return AppPreferences(sharedPreferences)
     }
+
+    @Provides
+    @Singleton
+    fun provideRepository(apiService: ApiService, appPreferences: AppPreferences): Repository {
+        return RepositoryImpl(apiService, appPreferences)
+    }
+
+
+//    @Provides
+//    @Singleton
+//    fun provideRegisterUseCase(repository: Repository): RegisterUseCase {
+//        return RegisterUseCase(repository)
+//    }
 }

@@ -7,6 +7,9 @@
     <string name="title_sign_up">Sign Up</string>
     <string name="title_login_more">Or continue with</string>
 
+    <!-- Splash Screen -->
+    <string name="title_start">Let\'s Start</string>
+
     <!-- Login Screen -->
     <string name="button_text_login">Log In</string>
     <string name="title_welcome">Welcome Back!</string>

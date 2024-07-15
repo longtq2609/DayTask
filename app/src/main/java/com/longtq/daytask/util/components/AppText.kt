@@ -1,4 +1,4 @@
-package com.longtq.daytask.until.components
+package com.longtq.daytask.util.components
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable

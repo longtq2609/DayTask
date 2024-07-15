@@ -6,7 +6,6 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ApiService {
-
     @POST("v1/user")
     suspend fun register(@Body user: User): UseResponse
 }

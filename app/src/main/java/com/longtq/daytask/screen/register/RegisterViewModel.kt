@@ -2,8 +2,8 @@ package com.longtq.daytask.screen.register
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.longtq.daytask.until.sendEvent
 import com.longtq.daytask.util.Event
+import com.longtq.daytask.util.sendEvent
 import com.longtq.domain.entity.User
 import com.longtq.domain.usecase.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel

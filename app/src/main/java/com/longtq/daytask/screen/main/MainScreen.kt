@@ -16,7 +16,7 @@ import com.longtq.daytask.screen.create.createTaskScreen
 import com.longtq.daytask.screen.home.homeNavigation
 import com.longtq.daytask.screen.home.homeScreen
 import com.longtq.daytask.screen.notification.notificationScreen
-import com.longtq.daytask.until.components.AppBottomBar
+import com.longtq.daytask.util.components.AppBottomBar
 
 @Composable
 fun MainScreen(
