@@ -1,5 +1,7 @@
 package com.longtq.daytask.screen.create
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
@@ -15,6 +17,7 @@ fun NavController.navigationToCreateTask(
     navigate(createTaskNavigation, navOptions)
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 fun NavGraphBuilder.createTaskScreen(
     onBackClick: () -> Unit,
 

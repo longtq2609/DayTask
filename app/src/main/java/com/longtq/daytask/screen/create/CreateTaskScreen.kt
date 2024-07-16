@@ -1,5 +1,7 @@
 package com.longtq.daytask.screen.create
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -54,7 +56,10 @@ import com.longtq.daytask.util.components.AppText
 import com.longtq.daytask.util.components.AppTextField
 import com.longtq.daytask.util.components.AppTopBar
 import com.longtq.daytask.util.components.LoadingDialog
+import java.util.Calendar
+import java.util.Date
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CreateTaskScreen(
     onBackClick: () -> Unit,
@@ -76,11 +81,18 @@ fun CreateTaskScreen(
         dateNow = state.value.dateNow,
         onCreateTask = {
             viewModel.onCreateTask()
+        },
+        onChangeDate = {
+            viewModel.onChangeDate(it)
+        },
+        onChangeTime = {
+            viewModel.onChangeTime(it)
         }
     )
 
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateTaskView(
@@ -88,6 +100,8 @@ fun CreateTaskView(
     onChangeTitleText: (String) -> Unit,
     onChangeTaskDetail: (String) -> Unit,
     onRemoveMember: (String) -> Unit,
+    onChangeDate: (Date) -> Unit,
+    onChangeTime: (Date) -> Unit,
     onCreateTask: () -> Unit,
     timeNow: String = "",
     dateNow: String = "",
@@ -96,11 +110,15 @@ fun CreateTaskView(
     val titleTask = remember { mutableStateOf(TextFieldValue("")) }
     val taskDetail = remember { mutableStateOf(TextFieldValue("")) }
 
-    var timePickerState = rememberTimePickerState()
+    val timePickerState = rememberTimePickerState()
     var showTimePicker by remember { mutableStateOf(false) }
 
     val datePickerState = rememberDatePickerState()
     var showDatePicker by remember { mutableStateOf(false) }
+
+    var selectedDate by remember { mutableStateOf(Date()) }
+    var selectedTime by remember { mutableStateOf(Date()) }
+
 
     LoadingDialog(isLoading = state.value.isLoading)
     Scaffold(
@@ -293,6 +311,10 @@ fun CreateTaskView(
             confirmButton = {
                 TextButton(
                     onClick = {
+                        val selectedDateMillis =
+                            datePickerState.selectedDateMillis ?: return@TextButton
+                        selectedDate = Date(selectedDateMillis)
+                        onChangeDate.invoke(selectedDate)
                         showDatePicker = false
                     }
                 ) { Text("OK") }
@@ -316,6 +338,13 @@ fun CreateTaskView(
             confirmButton = {
                 TextButton(
                     onClick = {
+                        val calendar = Calendar.getInstance()
+                        calendar.time = selectedTime
+                        calendar.set(Calendar.HOUR_OF_DAY, timePickerState.hour)
+                        calendar.set(Calendar.MINUTE, timePickerState.minute)
+
+                        selectedTime = calendar.time
+                        onChangeTime.invoke(selectedTime)
                         showTimePicker = false
                     }
                 ) { Text("OK") }
@@ -335,6 +364,7 @@ fun CreateTaskView(
 
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Preview
 @Composable
 fun CreateTaskViewPreview() {
@@ -344,5 +374,7 @@ fun CreateTaskViewPreview() {
         onChangeTitleText = {},
         onChangeTaskDetail = {},
         onRemoveMember = {},
-        onCreateTask = {})
+        onCreateTask = {},
+        onChangeDate = {},
+        onChangeTime = {})
 }

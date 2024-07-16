@@ -1,5 +1,7 @@
 package com.longtq.daytask.navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -16,6 +18,7 @@ import com.longtq.daytask.screen.register.navigationToRegister
 import com.longtq.daytask.screen.register.registerScreen
 import com.longtq.daytask.screen.splash.splashScreen
 
+@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun AppNavigation(
     modifier: Modifier = Modifier,

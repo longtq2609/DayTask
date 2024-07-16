@@ -57,6 +57,30 @@ class CreateTaskViewModel @Inject constructor(
         }
     }
 
+    fun onChangeDate(date: Date) {
+        val dateFormat: DateFormat = SimpleDateFormat("dd/MM/yyyy")
+        val dateSelected = dateFormat.format(date)
+        viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    dateNow = dateSelected
+                )
+            }
+        }
+    }
+
+    fun onChangeTime(time: Date) {
+        val timeFormat: DateFormat = SimpleDateFormat("hh:mm a")
+        val timeSelected = timeFormat.format(time)
+        viewModelScope.launch {
+            _state.update {
+                it.copy(
+                    timeNow = timeSelected
+                )
+            }
+        }
+    }
+
     fun onCreateTask() {
 
     }
