@@ -28,6 +28,8 @@
 
     <!-- Home -->
     <string name="title_home">Home</string>
+    <string name="title_welcome_back">Welcome back</string>
+    <string name="title_search_tasks">Search tasks</string>
 
     <!-- Chat -->
     <string name="title_chat">Chat</string>
@@ -40,5 +42,8 @@
 
     <!-- Create Task -->
     <string name="title_create_task">Create Task"</string>
+
+    <!-- Profile -->
+    <string name="title_profile">Profile"</string>
 
 </resources>

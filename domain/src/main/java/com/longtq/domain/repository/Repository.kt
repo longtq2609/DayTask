@@ -9,4 +9,6 @@ interface Repository {
     fun isFirstLaunch(): Boolean
     suspend fun register(user: User): Either<NetworkError, User>
 
+    suspend fun getAllUsers(): Either<NetworkError, List<User>>
+
 }

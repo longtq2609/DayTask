@@ -10,6 +10,7 @@ import com.longtq.daytask.screen.login.loginScreen
 import com.longtq.daytask.screen.login.navigationToLogin
 import com.longtq.daytask.screen.main.mainScreen
 import com.longtq.daytask.screen.main.navigationToMain
+import com.longtq.daytask.screen.profile.profileScreen
 import com.longtq.daytask.screen.register.navigationToRegister
 import com.longtq.daytask.screen.register.registerScreen
 import com.longtq.daytask.screen.splash.splashScreen
@@ -31,6 +32,7 @@ fun AppNavigation(
             onNavigationToMain = { navController.navigationToMain() }
         )
         registerScreen { navController.popBackStack() }
-        mainScreen()
+        mainScreen(navController)
+        profileScreen { navController.popBackStack() }
     }
 }

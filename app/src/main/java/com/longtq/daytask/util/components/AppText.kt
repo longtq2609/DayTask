@@ -25,6 +25,7 @@ fun AppText(
         Font(R.font.sf_pro_display_semibold, FontWeight.SemiBold),
         Font(R.font.sf_pro_display_regular, FontWeight.Normal),
         Font(R.font.sf_pro_display_medium, FontWeight.Medium),
+        Font(R.font.pilat_extended_bold, FontWeight.Bold)
     )
     Text(
         textAlign = textAlign,

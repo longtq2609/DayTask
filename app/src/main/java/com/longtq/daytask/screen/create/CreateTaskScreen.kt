@@ -1,5 +1,6 @@
 package com.longtq.daytask.screen.create
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,6 +17,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.longtq.daytask.ui.theme.black
 import com.longtq.daytask.ui.theme.white
+import com.longtq.daytask.util.components.LoadingDialog
 
 @Composable
 fun CreateTaskScreen(
@@ -33,7 +35,8 @@ fun CreateTaskScreen(
 fun CreateTaskView(
     state: State<CreateTaskViewState>
 ) {
-
+    LoadingDialog(isLoading = state.value.isLoading)
+    Log.e("longtq", "CreateTaskView: ${state.value.listUsers}")
     Column(
         modifier = Modifier
             .fillMaxSize()

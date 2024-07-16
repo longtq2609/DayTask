@@ -16,9 +16,9 @@ fun NavController.navigationToHome(
 }
 
 fun NavGraphBuilder.homeScreen(
-
+    onNavigationToProfile: () -> Unit,
 ) {
     composable(route = homeNavigation) {
-        HomeScreen()
+        HomeScreen(onNavigationToProfile)
     }
 }

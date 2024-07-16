@@ -1,6 +1,5 @@
 package com.longtq.data
 
-import android.content.SharedPreferences
 import arrow.core.Either
 import com.longtq.data.api.ApiService
 import com.longtq.data.api.mapper.toDomainModel
@@ -26,6 +25,14 @@ class RepositoryImpl @Inject constructor(
     override suspend fun register(user: User): Either<NetworkError, User> {
         return Either.catch {
             apiService.register(user).toDomainModel()
+        }.mapLeft { it.toGeneralError() }
+    }
+
+    override suspend fun getAllUsers(): Either<NetworkError, List<User>> {
+        return Either.catch {
+            apiService.getAllUsers().map {
+                it.toDomainModel()
+            }
         }.mapLeft { it.toGeneralError() }
     }
 }

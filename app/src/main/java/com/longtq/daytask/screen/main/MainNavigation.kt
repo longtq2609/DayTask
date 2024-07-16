@@ -11,9 +11,10 @@ fun NavController.navigationToMain() {
 }
 
 fun NavGraphBuilder.mainScreen(
+    navController: NavController
 ) {
     composable(route = mainNavigation) {
-        MainScreen()
+        MainScreen(navController)
     }
 }
 

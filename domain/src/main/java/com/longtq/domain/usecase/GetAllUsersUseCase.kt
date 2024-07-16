@@ -6,10 +6,10 @@ import com.longtq.domain.entity.User
 import com.longtq.domain.repository.Repository
 import javax.inject.Inject
 
-class RegisterUseCase @Inject constructor(
+class GetAllUsersUseCase @Inject constructor(
     private val repository: Repository,
 ) {
-    suspend operator fun invoke(user: User): Either<NetworkError, User> {
-        return repository.register(user)
+    suspend operator fun invoke(): Either<NetworkError, List<User>> {
+        return repository.getAllUsers()
     }
 }
