@@ -41,7 +41,12 @@
     <string name="title_notification">Notification"</string>
 
     <!-- Create Task -->
-    <string name="title_create_task">Create Task"</string>
+    <string name="title_create_task">Create Task</string>
+    <string name="title_task">Task Title</string>
+    <string name="title_task_detail">Task Details</string>
+    <string name="title_add_team">Add team members</string>
+    <string name="title_time_date">Time &amp; Date</string>
+    <string name="title_create">Create</string>
 
     <!-- Profile -->
     <string name="title_profile">Profile"</string>

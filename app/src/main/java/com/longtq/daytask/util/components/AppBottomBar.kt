@@ -34,6 +34,7 @@ import com.longtq.daytask.ui.theme.slateBlue
 
 @Composable
 fun AppBottomBar(
+    navAnimatedController: NavController,
     navController: NavController
 ) {
     val item = listOf(
@@ -47,7 +48,7 @@ fun AppBottomBar(
     BottomNavigation(
         backgroundColor = darkBlue,
     ) {
-        val vanBackStackEntry by navController.currentBackStackEntryAsState()
+        val vanBackStackEntry by navAnimatedController.currentBackStackEntryAsState()
         val currentRoute = vanBackStackEntry?.destination?.route
 
         item.map {
@@ -60,15 +61,7 @@ fun AppBottomBar(
                     ),
                     selected = currentRoute == it.route,
                     onClick = {
-                        navController.navigate(it.route) {
-                            navController.graph.startDestinationRoute?.let { route ->
-                                popUpTo(route) {
-                                    saveState = true
-                                }
-                            }
-                            restoreState = true
-                            launchSingleTop = true
-                        }
+                        navController.navigationToCreateTask()
                     },
                     icon = {
                         Box(
@@ -104,7 +97,7 @@ fun AppBottomBar(
                     },
                     selected = currentRoute == it.route,
                     onClick = {
-                        navigateToBottomNavDestination(it, navController)
+                        navigateToBottomNavDestination(it, navAnimatedController)
                     },
                     icon = {
                         Icon(

@@ -16,9 +16,10 @@ fun NavController.navigationToCreateTask(
 }
 
 fun NavGraphBuilder.createTaskScreen(
+    onBackClick: () -> Unit,
 
 ) {
     composable(route = createTaskNavigation) {
-        CreateTaskScreen()
+        CreateTaskScreen(onBackClick = onBackClick)
     }
 }

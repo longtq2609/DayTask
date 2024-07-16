@@ -24,12 +24,13 @@ import com.longtq.daytask.ui.theme.white
 
 @Composable
 fun AppTopBar(
+    modifier: Modifier = Modifier,
     title: String,
     onBack: () -> Unit,
     isShowIcon: Boolean = false,
 ) {
     Row(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .background(mainColor),
         verticalAlignment = Alignment.CenterVertically

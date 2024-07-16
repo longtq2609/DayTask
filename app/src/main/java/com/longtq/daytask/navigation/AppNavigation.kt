@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.longtq.daytask.screen.create.createTaskScreen
 import com.longtq.daytask.screen.login.loginNavigation
 import com.longtq.daytask.screen.login.loginScreen
 import com.longtq.daytask.screen.login.navigationToLogin
@@ -34,5 +35,6 @@ fun AppNavigation(
         registerScreen { navController.popBackStack() }
         mainScreen(navController)
         profileScreen { navController.popBackStack() }
+        createTaskScreen { navController.popBackStack() }
     }
 }

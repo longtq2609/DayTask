@@ -13,7 +13,6 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.longtq.daytask.screen.calendar.calendarScreen
 import com.longtq.daytask.screen.chat.chatScreen
-import com.longtq.daytask.screen.create.createTaskScreen
 import com.longtq.daytask.screen.home.homeNavigation
 import com.longtq.daytask.screen.home.homeScreen
 import com.longtq.daytask.screen.notification.notificationScreen
@@ -44,7 +43,7 @@ fun MainView(
     val navAnimatedController = rememberAnimatedNavController()
     Scaffold(
         bottomBar = {
-            AppBottomBar(navController = navAnimatedController)
+            AppBottomBar(navAnimatedController = navAnimatedController, navController)
 
         },
 
@@ -56,7 +55,7 @@ fun MainView(
         ) {
             homeScreen { navController.navigateToProfile() }
             chatScreen()
-            createTaskScreen()
+//            createTaskScreen()
             calendarScreen()
             notificationScreen()
         }

@@ -34,6 +34,6 @@ fun AppText(
         color = color,
         fontFamily = firSansFamily,
         fontWeight = fontWeight,
-        fontSize = fontSize
+        fontSize = fontSize,
     )
 }
