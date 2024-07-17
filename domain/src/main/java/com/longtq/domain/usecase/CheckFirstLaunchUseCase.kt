@@ -6,7 +6,7 @@ import javax.inject.Inject
 class CheckFirstLaunchUseCase @Inject constructor(
     private val repository: Repository
 ) {
-    operator fun invoke(): Boolean {
+    suspend operator fun invoke(): Boolean {
         val isFirstLaunch = repository.isFirstLaunch()
         if (isFirstLaunch) {
             repository.setIsFirstLaunch(false)

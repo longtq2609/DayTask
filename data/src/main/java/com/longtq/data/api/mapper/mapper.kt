@@ -1,6 +1,6 @@
 package com.longtq.data.api.mapper
 
-import com.longtq.data.api.model.UseResponse
+import com.longtq.data.api.model.UserResponse
 import com.longtq.domain.entity.ApiError
 import com.longtq.domain.entity.NetworkError
 import com.longtq.domain.entity.User
@@ -19,6 +19,15 @@ fun Throwable.toGeneralError(): NetworkError {
     )
 }
 
-fun UseResponse.toDomainModel(): User {
-    return User(id, userName, email, password, avatar, displayName)
+fun UserResponse.toDomainModel(): User {
+    return User(
+        id = id,
+        userName = userName,
+        email = email,
+        password = password,
+        avatar = avatar,
+        displayName = displayName,
+        isChecked = false
+    )
 }
+

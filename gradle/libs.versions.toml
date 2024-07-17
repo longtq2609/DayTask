@@ -4,7 +4,6 @@ arrowCore = "1.2.3"
 arrowFxCoroutines = "1.2.0"
 coilCompose = "2.5.0"
 coilSvg = "2.6.0"
-gson = "2.10.1"
 kotlin = "1.9.0"
 coreKtx = "1.13.1"
 converterGson = "2.9.0"
@@ -28,8 +27,13 @@ lifecycleRuntimeComposeAndroid = "2.8.3"
 material3Android = "1.2.1"
 firebaseCrashlyticsBuildtools = "3.0.2"
 accompanistNavigationAnimation = "0.34.0"
+roomCompiler = "2.6.1"
+roomRuntime = "2.6.1"
 
 [libraries]
+androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomCompiler" }
+androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
+androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 accompanist-navigation-animation = { group = "com.google.accompanist", name = "accompanist-navigation-animation", version.ref = "accompanistNavigationAnimation" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "materialVersion" }

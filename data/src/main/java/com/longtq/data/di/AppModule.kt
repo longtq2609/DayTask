@@ -6,7 +6,6 @@ import com.longtq.data.RepositoryImpl
 import com.longtq.data.api.ApiService
 import com.longtq.data.preference.AppPreferences
 import com.longtq.domain.repository.Repository
-import com.longtq.domain.usecase.RegisterUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -58,10 +57,4 @@ class AppModule {
         return RepositoryImpl(apiService, appPreferences)
     }
 
-
-//    @Provides
-//    @Singleton
-//    fun provideRegisterUseCase(repository: Repository): RegisterUseCase {
-//        return RegisterUseCase(repository)
-//    }
 }

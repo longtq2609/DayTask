@@ -2,6 +2,8 @@
     <string name="app_name">DayTask</string>
 
     <!-- Common -->
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
     <string name="title_email_address">Email Address</string>
     <string name="title_password">Password</string>
     <string name="title_sign_up">Sign Up</string>
@@ -47,6 +49,11 @@
     <string name="title_add_team">Add team members</string>
     <string name="title_time_date">Time &amp; Date</string>
     <string name="title_create">Create</string>
+
+    <!-- Add Member -->
+    <string name="title_add_member">Add Member</string>
+    <string name="title_search_member">Search member</string>
+
 
     <!-- Profile -->
     <string name="title_profile">Profile"</string>

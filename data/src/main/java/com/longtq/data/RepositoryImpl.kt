@@ -14,11 +14,11 @@ class RepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val sharedPreferences: AppPreferences
 ) : Repository {
-    override fun setIsFirstLaunch(isFirstLaunch: Boolean) {
+    override suspend fun setIsFirstLaunch(isFirstLaunch: Boolean) {
         return sharedPreferences.setIsFirstLaunch(isFirstLaunch)
     }
 
-    override fun isFirstLaunch(): Boolean {
+    override suspend fun isFirstLaunch(): Boolean {
        return sharedPreferences.isFirstLaunch()
     }
 

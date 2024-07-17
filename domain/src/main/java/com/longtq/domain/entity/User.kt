@@ -7,5 +7,8 @@ data class User(
     var email: String? = "",
     val password: String? = "",
     val displayName: String? = "",
-    val avatar: String? = ""
+    val avatar: String? = "",
+    var isChecked: Boolean? = false
 )
+
+

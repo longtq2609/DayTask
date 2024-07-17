@@ -4,9 +4,13 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
+import com.longtq.daytask.activity.MainViewModel
+import com.longtq.daytask.screen.addmember.addMemberScreen
+import com.longtq.daytask.screen.addmember.navigationToAddMember
 import com.longtq.daytask.screen.create.createTaskScreen
 import com.longtq.daytask.screen.login.loginNavigation
 import com.longtq.daytask.screen.login.loginScreen
@@ -23,6 +27,7 @@ import com.longtq.daytask.screen.splash.splashScreen
 fun AppNavigation(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
+    mainViewModel: MainViewModel = hiltViewModel(),
     startDestination: String = loginNavigation
 ) {
     NavHost(
@@ -38,6 +43,14 @@ fun AppNavigation(
         registerScreen { navController.popBackStack() }
         mainScreen(navController)
         profileScreen { navController.popBackStack() }
-        createTaskScreen { navController.popBackStack() }
+        createTaskScreen(mainViewModel = mainViewModel, onBackClick = {
+            navController.popBackStack()
+        },
+            onNavigationToAddMember = {
+                navController.navigationToAddMember()
+            })
+        addMemberScreen(
+            mainViewModel = mainViewModel,
+            onBackClick = { navController.popBackStack() })
     }
 }

@@ -28,11 +28,13 @@ import androidx.compose.material3.TimePicker
 import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.State
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -41,12 +43,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.longtq.daytask.R
-import com.longtq.daytask.screen.create.components.MemberList
+import com.longtq.daytask.activity.MainViewModel
+import com.longtq.daytask.screen.create.components.MemberListChose
 import com.longtq.daytask.screen.create.components.TimePickerDialog
 import com.longtq.daytask.ui.theme.fordBlue
 import com.longtq.daytask.ui.theme.mainColor
@@ -56,6 +58,7 @@ import com.longtq.daytask.util.components.AppText
 import com.longtq.daytask.util.components.AppTextField
 import com.longtq.daytask.util.components.AppTopBar
 import com.longtq.daytask.util.components.LoadingDialog
+import com.longtq.domain.entity.User
 import java.util.Calendar
 import java.util.Date
 
@@ -63,7 +66,8 @@ import java.util.Date
 @Composable
 fun CreateTaskScreen(
     onBackClick: () -> Unit,
-
+    onNavigationToAddMember: () -> Unit,
+    mainViewModel: MainViewModel
 ) {
     val viewModel: CreateTaskViewModel = hiltViewModel()
     val state = viewModel.state.collectAsStateWithLifecycle()
@@ -73,9 +77,6 @@ fun CreateTaskScreen(
         onChangeTitleText = { viewModel.onChangeTitleText(it) },
         onChangeTaskDetail = {
             viewModel.onChangeTaskDetail(it)
-        },
-        onRemoveMember = {
-            viewModel.removeMember(it)
         },
         timeNow = state.value.timeNow,
         dateNow = state.value.dateNow,
@@ -87,6 +88,11 @@ fun CreateTaskScreen(
         },
         onChangeTime = {
             viewModel.onChangeTime(it)
+        },
+        onNavigationToAddMember = onNavigationToAddMember,
+        mainViewModel = mainViewModel,
+        onUpdateMember = {
+            viewModel.updateMember(it)
         }
     )
 
@@ -96,10 +102,12 @@ fun CreateTaskScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CreateTaskView(
+    onUpdateMember: (List<User>) -> Unit,
+    mainViewModel: MainViewModel,
+    onNavigationToAddMember: () -> Unit,
     onBackClick: () -> Unit,
     onChangeTitleText: (String) -> Unit,
     onChangeTaskDetail: (String) -> Unit,
-    onRemoveMember: (String) -> Unit,
     onChangeDate: (Date) -> Unit,
     onChangeTime: (Date) -> Unit,
     onCreateTask: () -> Unit,
@@ -119,6 +127,12 @@ fun CreateTaskView(
     var selectedDate by remember { mutableStateOf(Date()) }
     var selectedTime by remember { mutableStateOf(Date()) }
 
+    LaunchedEffect(Unit) {
+        snapshotFlow { mainViewModel.listMember.value }
+            .collect { updatedList ->
+                onUpdateMember(updatedList)
+            }
+    }
 
     LoadingDialog(isLoading = state.value.isLoading)
     Scaffold(
@@ -192,13 +206,15 @@ fun CreateTaskView(
 
                 )
 
-                MemberList(users = state.value.listUsers,
+                MemberListChose(
+                    users = state.value.listUsers,
                     modifier = Modifier.padding(bottom = dimensionResource(id = R.dimen.dimen_16)),
                     onRemoveMember = { idUser ->
-                        onRemoveMember(idUser)
+                        mainViewModel.removeMemberSelected(idUser)
+                        onUpdateMember(mainViewModel.listMember.value)
                     },
                     onAddMember = {
-
+                        onNavigationToAddMember.invoke()
                     })
 
                 AppText(
@@ -317,14 +333,14 @@ fun CreateTaskView(
                         onChangeDate.invoke(selectedDate)
                         showDatePicker = false
                     }
-                ) { Text("OK") }
+                ) { Text(stringResource(id = R.string.ok)) }
             },
             dismissButton = {
                 TextButton(
                     onClick = {
                         showDatePicker = false
                     }
-                ) { Text("Cancel") }
+                ) { Text(stringResource(id = R.string.cancel)) }
             }
         )
         {
@@ -334,7 +350,7 @@ fun CreateTaskView(
 
     if (showTimePicker) {
         TimePickerDialog(
-            onDismissRequest = { /*TODO*/ },
+            onDismissRequest = { },
             confirmButton = {
                 TextButton(
                     onClick = {
@@ -347,14 +363,14 @@ fun CreateTaskView(
                         onChangeTime.invoke(selectedTime)
                         showTimePicker = false
                     }
-                ) { Text("OK") }
+                ) { Text(stringResource(id = R.string.ok)) }
             },
             dismissButton = {
                 TextButton(
                     onClick = {
                         showTimePicker = false
                     }
-                ) { Text("Cancel") }
+                ) { Text(stringResource(id = R.string.cancel)) }
             }
         )
         {
@@ -363,18 +379,19 @@ fun CreateTaskView(
     }
 
 }
-
-@RequiresApi(Build.VERSION_CODES.O)
-@Preview
-@Composable
-fun CreateTaskViewPreview() {
-    CreateTaskView(
-        state = remember { mutableStateOf(CreateTaskViewState()) },
-        onBackClick = {},
-        onChangeTitleText = {},
-        onChangeTaskDetail = {},
-        onRemoveMember = {},
-        onCreateTask = {},
-        onChangeDate = {},
-        onChangeTime = {})
-}
+//
+//@RequiresApi(Build.VERSION_CODES.O)
+//@Preview
+//@Composable
+//fun CreateTaskViewPreview() {
+//    CreateTaskView(
+//        state = remember { mutableStateOf(CreateTaskViewState()) },
+//        onBackClick = {},
+//        onChangeTitleText = {},
+//        onChangeTaskDetail = {},
+//        onRemoveMember = {},
+//        onCreateTask = {},
+//        onChangeDate = {},
+//        onChangeTime = {},
+//        onNavigationToAddMember = {},)
+//}

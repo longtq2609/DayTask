@@ -1,4 +1,4 @@
-package com.longtq.daytask
+package com.longtq.daytask.activity
 
 import android.os.Bundle
 import android.widget.Toast
@@ -16,7 +16,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.longtq.daytask.navigation.AppNavigation
-import com.longtq.daytask.screen.home.homeNavigation
 import com.longtq.daytask.screen.login.loginNavigation
 import com.longtq.daytask.screen.splash.splashNavigation
 import com.longtq.daytask.ui.theme.DayTaskTheme
@@ -70,7 +69,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = mainColor
                 ) {
-                    AppNavigation(startDestination = startDestination)
+                    AppNavigation(startDestination = startDestination, mainViewModel = viewModel)
                     if (showDialog.value) {
                         CustomDialog(
                             title = titleDialog.value,
